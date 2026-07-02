@@ -1,9 +1,8 @@
 import { roleAccounts, DEMO_PASSWORD } from '@/config/roleAccounts';
 import { publicIcons } from '@/config/publicIcons';
-import type { UserRole } from '@/types';
 
 interface DemoCredentialsPanelProps {
-  onFillCredentials: (email: string, role: UserRole) => void;
+  onFillCredentials: (email: string) => void;
 }
 
 export default function DemoCredentialsPanel({ onFillCredentials }: DemoCredentialsPanelProps) {
@@ -19,7 +18,7 @@ export default function DemoCredentialsPanel({ onFillCredentials }: DemoCredenti
           <button
             key={account.user.email}
             type="button"
-            onClick={() => onFillCredentials(account.user.email, account.user.role)}
+            onClick={() => onFillCredentials(account.user.email)}
             className="flex w-full items-center gap-3 rounded-xl border border-primary-100 bg-white p-3 text-left transition-all hover:border-primary-300 hover:bg-primary-50/60 active:scale-[0.99]"
           >
             <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white shadow-sm ${account.gradient}`}>

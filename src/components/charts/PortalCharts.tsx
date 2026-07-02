@@ -18,7 +18,7 @@ import {
 } from './AdminCharts';
 
 interface PortalChartsProps {
-  variant: 'hr-dashboard' | 'hr-reports' | 'dept-reports' | 'employee-dashboard';
+  variant: 'hr-dashboard' | 'hr-reports' | 'dept-dashboard' | 'dept-reports' | 'employee-dashboard';
   employees: Employee[];
   departments: Department[];
   leaveRequests: LeaveRequest[];
@@ -139,24 +139,41 @@ export default function PortalCharts({
     );
   }
 
-  return (
-    <div className="space-y-6">
+  if (variant === 'dept-dashboard') {
+    return (
       <div className="chart-grid">
         <div className="chart-span-2">
           <WorkforceTrendChart employees={scoped.employees} />
         </div>
-        <AttendanceRadialChart attendance={scoped.attendance} />
-      </div>
-      <div className="chart-grid">
         <LeaveStatusDonut leaveRequests={scoped.leaveRequests} />
         <PerformanceRadarChart performance={scoped.performance} />
-        <EmployeeStatusPie employees={scoped.employees} />
-        <AttendanceBreakdownChart attendance={scoped.attendance} />
+        <AttendanceRadialChart attendance={scoped.attendance} />
       </div>
-      <div className="chart-grid chart-grid-3">
-        <LeaveTypeBarChart leaveRequests={scoped.leaveRequests} />
-        <WeeklyActivityChart />
+    );
+  }
+
+  if (variant === 'dept-reports') {
+    return (
+      <div className="space-y-6">
+        <div className="chart-grid">
+          <div className="chart-span-2">
+            <WorkforceTrendChart employees={scoped.employees} />
+          </div>
+          <AttendanceRadialChart attendance={scoped.attendance} />
+        </div>
+        <div className="chart-grid">
+          <LeaveStatusDonut leaveRequests={scoped.leaveRequests} />
+          <PerformanceRadarChart performance={scoped.performance} />
+          <EmployeeStatusPie employees={scoped.employees} />
+          <AttendanceBreakdownChart attendance={scoped.attendance} />
+        </div>
+        <div className="chart-grid chart-grid-3">
+          <LeaveTypeBarChart leaveRequests={scoped.leaveRequests} />
+          <WeeklyActivityChart />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 }

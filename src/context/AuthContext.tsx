@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
-import type { User, UserRole, RegisterData } from '@/types';
+import type { User, RegisterData } from '@/types';
 import { mockUsers } from '@/data/mockData';
 import { getRoleDashboardPath } from '@/config/roleConfig';
 import { getAccountByEmail } from '@/config/roleAccounts';
@@ -28,7 +28,7 @@ interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   users: User[];
-  login: (email: string, password: string, role?: UserRole) => { success: boolean; error?: string };
+  login: (email: string, password: string) => { success: boolean; error?: string; user?: User };
   register: (data: RegisterData) => { success: boolean; error?: string };
   quickAccess: (email: string) => { success: boolean; error?: string };
   logout: () => void;
@@ -50,14 +50,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     else localStorage.removeItem(SESSION_KEY);
   }, []);
 
-  const login = useCallback((email: string, password: string, role?: UserRole) => {
+  const login = useCallback((email: string, password: string) => {
     const normalizedEmail = email.trim().toLowerCase();
-    const found = users.find(
-      (u) => u.email.toLowerCase() === normalizedEmail && (!role || u.role === role),
-    );
+    const found = users.find((u) => u.email.toLowerCase() === normalizedEmail);
 
     if (!found) {
-      return { success: false, error: 'No account found with this email and role.' };
+      return { success: false, error: 'No account found with this email.' };
     }
 
     if (found.password && found.password !== password) {
@@ -65,7 +63,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     setSession(found);
-    return { success: true };
+    return { success: true, user: found };
   }, [users, setSession]);
 
   const register = useCallback((data: RegisterData) => {

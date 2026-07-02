@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { getRoleDashboardPath } from '@/config/roleConfig';
-import { roleAccounts, DEMO_PASSWORD } from '@/config/roleAccounts';
+import { DEMO_PASSWORD } from '@/config/roleAccounts';
 import AuthPageHeader from '@/components/auth/AuthPageHeader';
 import QuickAccessSection from '@/components/auth/QuickAccessSection';
 import DemoCredentialsPanel from '@/components/auth/DemoCredentialsPanel';
-import RoleSelector from '@/components/auth/RoleSelector';
 import DeveloperCredit from '@/components/shared/DeveloperCredit';
-import type { UserRole } from '@/types';
+import { roleAccounts } from '@/config/roleAccounts';
 
 export default function LoginPage() {
   const { login, quickAccess } = useAuth();
@@ -17,7 +16,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loadingRole, setLoadingRole] = useState<string | null>(null);
-  const [form, setForm] = useState({ email: '', password: '', role: 'employee' as UserRole });
+  const [form, setForm] = useState({ email: '', password: '' });
 
   useEffect(() => {
     if (searchParams.get('mode') === 'register') {
@@ -44,8 +43,8 @@ export default function LoginPage() {
     }
   };
 
-  const fillDemoCredentials = (email: string, role: UserRole) => {
-    setForm({ email, password: DEMO_PASSWORD, role });
+  const fillDemoCredentials = (email: string) => {
+    setForm({ email, password: DEMO_PASSWORD });
     setError('');
     document.getElementById('login-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
@@ -57,9 +56,9 @@ export default function LoginPage() {
       setError('Please enter email and password.');
       return;
     }
-    const result = login(form.email, form.password, form.role);
-    if (result.success) {
-      navigate(getRoleDashboardPath(form.role));
+    const result = login(form.email, form.password);
+    if (result.success && result.user) {
+      navigate(getRoleDashboardPath(result.user.role));
     } else {
       setError(result.error || 'Login failed');
     }
@@ -70,7 +69,7 @@ export default function LoginPage() {
       <AuthPageHeader
         tag="Sign In"
         title="Welcome Back"
-        description="Sign in with your credentials, fill a demo account, or use quick access below."
+        description="Sign in with your credentials — your role is detected automatically from your account."
       />
 
       <div className="auth-page">
@@ -119,8 +118,6 @@ export default function LoginPage() {
                     </div>
                   </div>
                 </div>
-
-                <RoleSelector value={form.role} onChange={(role) => setForm({ ...form, role })} />
 
                 {error && <div className="auth-error">{error}</div>}
 

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import PageHeader from '@/components/shared/PageHeader';
 import StatCard from '@/components/shared/StatCard';
+import PortalCharts from '@/components/charts/PortalCharts';
 import { useAppData } from '@/context/AppDataContext';
 import { useAuth } from '@/context/AuthContext';
 
@@ -11,7 +12,7 @@ const ArrowIcon = () => (
 );
 
 export default function DepartmentHeadDashboard() {
-  const { employees, attendance, leaveRequests, tasks } = useAppData();
+  const { employees, attendance, leaveRequests, tasks, performance, departments } = useAppData();
   const { user } = useAuth();
   const dept = user?.department || 'Science';
 
@@ -21,7 +22,12 @@ export default function DepartmentHeadDashboard() {
 
   return (
     <div className="page-shell">
-      <PageHeader badge="Department Head" title={`${dept} Dashboard`} description="Department oversight, team management, and analytics" />
+      <PageHeader
+        badge="Department Head"
+        title={`${dept} Dashboard`}
+        description="Department oversight, team management, and analytics"
+        actions={<Link to="/department-head/reports" className="btn-primary text-sm">Full Reports →</Link>}
+      />
 
       <div className="stat-grid">
         <StatCard title="Department Employees" value={deptEmployees.length} color="blue"
@@ -33,6 +39,22 @@ export default function DepartmentHeadDashboard() {
         <StatCard title="Present Today" value={attendance.filter(a => deptEmployees.some(e => e.name === a.employeeName) && a.status === 'present').length} color="purple"
           icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>} />
       </div>
+
+      <section>
+        <div className="mb-4 sm:mb-5">
+          <h2 className="chart-section-title">Department Analytics Hub</h2>
+          <p className="chart-section-lead">Team workforce, leave, attendance & performance insights</p>
+        </div>
+        <PortalCharts
+          variant="dept-dashboard"
+          employees={employees}
+          departments={departments}
+          leaveRequests={leaveRequests}
+          attendance={attendance}
+          performance={performance}
+          departmentName={dept}
+        />
+      </section>
 
       <div className="content-grid">
         <div className="card">
