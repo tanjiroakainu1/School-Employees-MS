@@ -35,11 +35,19 @@ interface AppDataContextType {
   updateEmployee: (id: string, updates: Partial<Employee>) => void;
   deleteEmployee: (id: string) => void;
   addDepartment: (dept: Omit<Department, 'id' | 'employeeCount'>) => void;
+  updateDepartment: (id: string, updates: Partial<Department>) => void;
+  deleteDepartment: (id: string) => void;
   addPosition: (pos: Omit<Position, 'id'>) => void;
+  updatePosition: (id: string, updates: Partial<Position>) => void;
+  deletePosition: (id: string) => void;
   recordAttendance: (record: Omit<AttendanceRecord, 'id'>) => void;
   submitLeaveRequest: (req: Omit<LeaveRequest, 'id' | 'status' | 'submittedAt'>) => void;
+  updateLeaveRequest: (id: string, updates: Partial<Pick<LeaveRequest, 'type' | 'startDate' | 'endDate' | 'reason'>>) => void;
+  deleteLeaveRequest: (id: string) => void;
   updateLeaveStatus: (id: string, status: 'approved' | 'rejected') => void;
   addPerformanceEvaluation: (eval_: Omit<PerformanceEvaluation, 'id'>) => void;
+  updatePerformanceEvaluation: (id: string, updates: Partial<PerformanceEvaluation>) => void;
+  deletePerformanceEvaluation: (id: string) => void;
   assignTask: (task: Omit<Task, 'id' | 'status'>) => void;
   updateTaskStatus: (id: string, status: Task['status']) => void;
   addAnnouncement: (ann: Omit<Announcement, 'id'>) => void;
@@ -76,10 +84,32 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
     setDepartments((prev) => [...prev, { ...dept, id, employeeCount: 0 }]);
   }, [departments.length]);
 
+  const updateDepartment = useCallback((id: string, updates: Partial<Department>) => {
+    setDepartments((prev) => prev.map((d) => (d.id === id ? { ...d, ...updates } : d)));
+  }, []);
+
+  const deleteDepartment = useCallback((id: string) => {
+    setDepartments((prev) => {
+      const dept = prev.find((d) => d.id === id);
+      if (dept) {
+        setPositions((posPrev) => posPrev.filter((p) => p.department !== dept.name));
+      }
+      return prev.filter((d) => d.id !== id);
+    });
+  }, []);
+
   const addPosition = useCallback((pos: Omit<Position, 'id'>) => {
     const id = `P${String(positions.length + 1).padStart(3, '0')}`;
     setPositions((prev) => [...prev, { ...pos, id }]);
   }, [positions.length]);
+
+  const updatePosition = useCallback((id: string, updates: Partial<Position>) => {
+    setPositions((prev) => prev.map((p) => (p.id === id ? { ...p, ...updates } : p)));
+  }, []);
+
+  const deletePosition = useCallback((id: string) => {
+    setPositions((prev) => prev.filter((p) => p.id !== id));
+  }, []);
 
   const recordAttendance = useCallback((record: Omit<AttendanceRecord, 'id'>) => {
     const id = `A${String(attendance.length + 1).padStart(3, '0')}`;
@@ -94,6 +124,14 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
     ]);
   }, [leaveRequests.length]);
 
+  const updateLeaveRequest = useCallback((id: string, updates: Partial<Pick<LeaveRequest, 'type' | 'startDate' | 'endDate' | 'reason'>>) => {
+    setLeaveRequests((prev) => prev.map((l) => (l.id === id ? { ...l, ...updates } : l)));
+  }, []);
+
+  const deleteLeaveRequest = useCallback((id: string) => {
+    setLeaveRequests((prev) => prev.filter((l) => l.id !== id));
+  }, []);
+
   const updateLeaveStatus = useCallback((id: string, status: 'approved' | 'rejected') => {
     setLeaveRequests((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
   }, []);
@@ -102,6 +140,14 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
     const id = `PE${String(performance.length + 1).padStart(3, '0')}`;
     setPerformance((prev) => [...prev, { ...eval_, id }]);
   }, [performance.length]);
+
+  const updatePerformanceEvaluation = useCallback((id: string, updates: Partial<PerformanceEvaluation>) => {
+    setPerformance((prev) => prev.map((p) => (p.id === id ? { ...p, ...updates } : p)));
+  }, []);
+
+  const deletePerformanceEvaluation = useCallback((id: string) => {
+    setPerformance((prev) => prev.filter((p) => p.id !== id));
+  }, []);
 
   const assignTask = useCallback((task: Omit<Task, 'id' | 'status'>) => {
     const id = `T${String(tasks.length + 1).padStart(3, '0')}`;
@@ -133,11 +179,19 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
         updateEmployee,
         deleteEmployee,
         addDepartment,
+        updateDepartment,
+        deleteDepartment,
         addPosition,
+        updatePosition,
+        deletePosition,
         recordAttendance,
         submitLeaveRequest,
+        updateLeaveRequest,
+        deleteLeaveRequest,
         updateLeaveStatus,
         addPerformanceEvaluation,
+        updatePerformanceEvaluation,
+        deletePerformanceEvaluation,
         assignTask,
         updateTaskStatus,
         addAnnouncement,

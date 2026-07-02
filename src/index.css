@@ -148,6 +148,10 @@
     @apply table-action-btn text-red-600 hover:bg-red-50;
   }
 
+  .crud-actions {
+    @apply flex flex-wrap gap-2;
+  }
+
   .data-table tbody tr {
     @apply border-t border-primary-50/80 transition-colors duration-150 hover:bg-primary-50/50;
   }
@@ -254,6 +258,101 @@
 
   .section-lead {
     @apply mt-3 text-sm text-ink-500 sm:text-base;
+  }
+
+  .auth-page {
+    @apply mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8;
+  }
+
+  .auth-split {
+    @apply grid grid-cols-1 items-start gap-6 lg:grid-cols-5 lg:gap-8;
+  }
+
+  .auth-form-card {
+    @apply card h-full shadow-soft;
+  }
+
+  .auth-side-card {
+    @apply card h-full shadow-soft lg:sticky lg:top-24;
+  }
+
+  .auth-error {
+    @apply rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 ring-1 ring-red-200/60;
+  }
+
+  .role-option {
+    @apply min-h-[3.75rem] touch-manipulation rounded-xl border p-3 text-left text-sm transition-all;
+  }
+
+  .role-option-active {
+    @apply role-option border-primary-500 bg-primary-50 ring-2 ring-primary-500/20;
+  }
+
+  .role-option-idle {
+    @apply role-option border-ink-200 hover:border-primary-200 hover:bg-mint-50;
+  }
+
+  .demo-fill-btn {
+    @apply shrink-0 rounded-lg bg-primary-50 px-2.5 py-1.5 text-xs font-semibold text-primary-700 ring-1 ring-primary-200/70 transition hover:bg-primary-100;
+  }
+
+  .quick-access-card {
+    @apply relative flex h-full min-h-[11rem] flex-col overflow-hidden rounded-2xl border border-ink-200/80 bg-white p-4 text-left shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-glow active:scale-[0.99] sm:min-h-[12.5rem] sm:p-5;
+  }
+
+  /* ── Charts ── */
+  .chart-card {
+    @apply relative overflow-hidden rounded-2xl border border-primary-100/80 bg-white/95 p-4 shadow-soft backdrop-blur-sm sm:p-5;
+  }
+
+  .chart-glow-primary::before {
+    content: '';
+    @apply pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-primary-400/15 blur-3xl;
+  }
+
+  .chart-glow-accent::before {
+    content: '';
+    @apply pointer-events-none absolute -left-8 -bottom-8 h-28 w-28 rounded-full bg-accent-400/20 blur-3xl;
+  }
+
+  .chart-card-header {
+    @apply relative mb-4 flex items-start justify-between gap-3;
+  }
+
+  .chart-card-title {
+    @apply text-base font-extrabold tracking-tight text-ink-900 sm:text-lg;
+  }
+
+  .chart-card-subtitle {
+    @apply mt-0.5 text-xs text-ink-500 sm:text-sm;
+  }
+
+  .chart-badge {
+    @apply shrink-0 rounded-full bg-primary-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-800 ring-1 ring-primary-200/70;
+  }
+
+  .chart-card-body {
+    @apply relative -mx-1 min-h-[240px] sm:min-h-[260px];
+  }
+
+  .chart-grid {
+    @apply grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:gap-6;
+  }
+
+  .chart-grid-3 {
+    @apply lg:grid-cols-3;
+  }
+
+  .chart-span-2 {
+    @apply lg:col-span-2;
+  }
+
+  .chart-section-title {
+    @apply text-lg font-extrabold tracking-tight text-ink-900 sm:text-xl;
+  }
+
+  .chart-section-lead {
+    @apply mt-1 text-sm text-ink-500;
   }
 
   .auth-gradient {

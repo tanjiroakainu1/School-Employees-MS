@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import PageHeader from '@/components/shared/PageHeader';
 import StatCard from '@/components/shared/StatCard';
+import PortalCharts from '@/components/charts/PortalCharts';
 import { useAppData } from '@/context/AppDataContext';
 import { useAuth } from '@/context/AuthContext';
 
@@ -11,7 +12,7 @@ const ArrowIcon = () => (
 );
 
 export default function EmployeeDashboard() {
-  const { leaveRequests, attendance, performance, tasks, announcements } = useAppData();
+  const { leaveRequests, attendance, performance, tasks, announcements, employees, departments } = useAppData();
   const { user } = useAuth();
   const name = user?.name || 'Employee';
 
@@ -26,6 +27,7 @@ export default function EmployeeDashboard() {
         badge="Employee Portal"
         title={`Welcome, ${name.split(' ')[0]}`}
         description={`${user?.department || 'School'} · ${user?.position || 'Employee'}`}
+        actions={<Link to="/employee/leave" className="btn-primary text-sm">Manage Leave →</Link>}
       />
 
       <div className="stat-grid">
@@ -38,6 +40,22 @@ export default function EmployeeDashboard() {
         <StatCard title="Active Tasks" value={myTasks.filter(t => t.status !== 'completed').length} color="yellow"
           icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>} />
       </div>
+
+      <section>
+        <div className="mb-4 sm:mb-5">
+          <h2 className="chart-section-title">Personal Analytics Hub</h2>
+          <p className="chart-section-lead">Your leave, attendance & performance insights</p>
+        </div>
+        <PortalCharts
+          variant="employee-dashboard"
+          employees={employees}
+          departments={departments}
+          leaveRequests={leaveRequests}
+          attendance={attendance}
+          performance={performance}
+          employeeName={name}
+        />
+      </section>
 
       <div className="content-grid">
         <div className="card">

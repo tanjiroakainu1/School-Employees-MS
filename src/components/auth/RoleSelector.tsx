@@ -17,14 +17,10 @@ export default function RoleSelector({ value, onChange, label = 'Select Role' }:
             key={r.value}
             type="button"
             onClick={() => onChange(r.value)}
-            className={`rounded-xl border p-3 text-left text-sm transition-all ${
-              value === r.value
-                ? 'border-primary-500 bg-primary-50 ring-2 ring-primary-500/20'
-                : 'border-ink-200 hover:border-primary-200 hover:bg-mint-50'
-            }`}
+            className={value === r.value ? 'role-option-active' : 'role-option-idle'}
           >
             <p className="font-semibold text-ink-900">{r.label}</p>
-            <p className="mt-0.5 text-xs text-ink-500">{r.description}</p>
+            <p className="mt-0.5 text-xs leading-snug text-ink-500">{r.description}</p>
           </button>
         ))}
       </div>

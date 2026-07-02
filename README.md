@@ -4,13 +4,13 @@ A TypeScript React + Tailwind CSS application for managing school employee infor
 
 **Developer:** **Raminder Jangao** — Lead Developer & System Architect
 
-Crafted with the Candy Green design system, SAGE AI chatbot, 4 role portals, and 32 feature pages.
+Crafted with the Candy Green design system, SAGE AI chatbot, 4 role portals, and 30 feature pages.
 
 ## Roles
 
 | Role | Dashboard Path | Features |
 |------|---------------|----------|
-| Super Admin | `/super-admin/dashboard` | Users, roles, settings, departments, reports, backup |
+| Super Admin | `/super-admin/dashboard` | Users, roles, departments, reports |
 | HR Officer | `/hr-officer/dashboard` | Register employees, hiring, leave approval, attendance, performance |
 | Department Head | `/department-head/dashboard` | Team view, tasks, leave recommendations, department reports |
 | Employee | `/employee/dashboard` | Profile, schedule, leave requests, documents, announcements |
@@ -85,7 +85,7 @@ Test the AI engine: `npm run test:chatbot`
 ```
 src/
 ├── roles/
-│   ├── super-admin/     # 8 pages (dashboard + 7 features)
+│   ├── super-admin/     # 6 pages (dashboard + 5 features)
 │   ├── hr-officer/      # 8 pages
 │   ├── department-head/ # 8 pages
 │   └── employee/        # 8 pages

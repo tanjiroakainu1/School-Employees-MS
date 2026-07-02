@@ -19,7 +19,6 @@ export default function LoginPage() {
   const [loadingRole, setLoadingRole] = useState<string | null>(null);
   const [form, setForm] = useState({ email: '', password: '', role: 'employee' as UserRole });
 
-  // Redirect legacy /login?mode=register URLs
   useEffect(() => {
     if (searchParams.get('mode') === 'register') {
       navigate('/register', { replace: true });
@@ -48,7 +47,7 @@ export default function LoginPage() {
   const fillDemoCredentials = (email: string, role: UserRole) => {
     setForm({ email, password: DEMO_PASSWORD, role });
     setError('');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('login-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -71,71 +70,72 @@ export default function LoginPage() {
       <AuthPageHeader
         tag="Sign In"
         title="Welcome Back"
-        description="Sign in to your role dashboard or use quick demo access below."
+        description="Sign in with your credentials, fill a demo account, or use quick access below."
       />
 
-      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-        <div className="flex flex-col gap-6 lg:gap-8">
-          <div className="order-1 grid grid-cols-1 gap-6 lg:order-2 lg:grid-cols-5 lg:gap-8">
-            <section className="lg:col-span-3">
-            <div className="card shadow-soft">
-              <form onSubmit={handleLogin} className="space-y-4 sm:space-y-5">
+      <div className="auth-page">
+        <div className="auth-split">
+          <section id="login-form" className="scroll-mt-24 lg:col-span-3">
+            <div className="auth-form-card">
+              <form onSubmit={handleLogin} className="space-y-5">
                 <div>
                   <h2 className="text-lg font-bold text-ink-900 sm:text-xl">Sign in to your account</h2>
                   <p className="mt-1 text-sm text-ink-500">
-                    Enter your credentials or use quick demo access
+                    Enter your credentials or pick a demo account on the right
                   </p>
                 </div>
 
-                <div>
-                  <label className="label">Email Address</label>
-                  <input
-                    type="email"
-                    className="input-field"
-                    placeholder="you@school.edu"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    autoComplete="email"
-                  />
-                </div>
-
-                <div>
-                  <label className="label">Password</label>
-                  <div className="relative">
+                <div className="space-y-4">
+                  <div>
+                    <label className="label">Email Address</label>
                     <input
-                      type={showPassword ? 'text' : 'password'}
-                      className="input-field pr-12"
-                      placeholder="Enter password"
-                      value={form.password}
-                      onChange={(e) => setForm({ ...form, password: e.target.value })}
-                      autoComplete="current-password"
+                      type="email"
+                      className="input-field"
+                      placeholder="you@school.edu"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      autoComplete="email"
                     />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-1 top-1/2 flex h-11 min-w-11 -translate-y-1/2 items-center justify-center px-3 text-xs font-medium text-ink-400 hover:text-ink-600"
-                    >
-                      {showPassword ? 'Hide' : 'Show'}
-                    </button>
+                  </div>
+
+                  <div>
+                    <label className="label">Password</label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        className="input-field pr-14"
+                        placeholder="Enter password"
+                        value={form.password}
+                        onChange={(e) => setForm({ ...form, password: e.target.value })}
+                        autoComplete="current-password"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-1 top-1/2 flex h-11 min-w-11 -translate-y-1/2 items-center justify-center px-3 text-xs font-semibold text-ink-500 hover:text-primary-700"
+                      >
+                        {showPassword ? 'Hide' : 'Show'}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
                 <RoleSelector value={form.role} onChange={(role) => setForm({ ...form, role })} />
 
-                {error && (
-                  <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
-                )}
+                {error && <div className="auth-error">{error}</div>}
 
-                <button type="submit" className="btn-primary w-full py-3">
-                  Sign In to Dashboard
-                </button>
+                <div className="space-y-4 pt-1">
+                  <button type="submit" className="btn-primary w-full py-3">
+                    Sign In to Dashboard
+                  </button>
 
-                <p className="text-center text-sm text-ink-500">
-                  Don&apos;t have an account?{' '}
-                  <Link to="/register" className="font-semibold text-primary-600 hover:text-primary-700">
-                    Create one here
-                  </Link>
-                </p>
+                  <p className="text-center text-sm text-ink-500">
+                    Don&apos;t have an account?{' '}
+                    <Link to="/register" className="font-semibold text-primary-600 hover:text-primary-700">
+                      Create one here
+                    </Link>
+                  </p>
+                </div>
               </form>
             </div>
           </section>
@@ -143,12 +143,9 @@ export default function LoginPage() {
           <aside className="lg:col-span-2">
             <DemoCredentialsPanel onFillCredentials={fillDemoCredentials} />
           </aside>
-          </div>
-
-          <div className="order-2 lg:order-1">
-            <QuickAccessSection loadingRole={loadingRole} onQuickAccess={handleQuickAccess} />
-          </div>
         </div>
+
+        <QuickAccessSection loadingRole={loadingRole} onQuickAccess={handleQuickAccess} />
 
         <div className="mt-8">
           <DeveloperCredit variant="compact" />

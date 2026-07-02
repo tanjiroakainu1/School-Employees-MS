@@ -10,11 +10,9 @@ export const roleConfigs: Record<UserRole, RoleConfig> = {
       { label: 'Dashboard', path: '/super-admin/dashboard' },
       { label: 'Manage Users', path: '/super-admin/users' },
       { label: 'Manage Roles', path: '/super-admin/roles' },
-      { label: 'System Settings', path: '/super-admin/settings' },
       { label: 'Departments', path: '/super-admin/departments' },
       { label: 'All Employees', path: '/super-admin/employees' },
       { label: 'Reports', path: '/super-admin/reports' },
-      { label: 'Backup & Restore', path: '/super-admin/backup' },
     ],
   },
   'hr-officer': {

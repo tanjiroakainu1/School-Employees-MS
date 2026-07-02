@@ -10,7 +10,7 @@ export const developerInfo = {
   highlights: [
     { icon: '🎨', label: 'Candy Green UI', desc: 'Custom design system & theme' },
     { icon: '🤖', label: 'SAGE AI', desc: 'Intelligent chatbot engine' },
-    { icon: '👥', label: '4 Role Portals', desc: '32 feature pages built' },
+    { icon: '👥', label: '4 Role Portals', desc: '30 feature pages built' },
     { icon: '📱', label: 'Fully Responsive', desc: 'Mobile-first everywhere' },
   ],
 } as const;

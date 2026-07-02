@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import PageHeader from '@/components/shared/PageHeader';
 import StatCard from '@/components/shared/StatCard';
+import PortalCharts from '@/components/charts/PortalCharts';
 import { useAppData } from '@/context/AppDataContext';
 
 const ArrowIcon = () => (
@@ -10,11 +11,16 @@ const ArrowIcon = () => (
 );
 
 export default function HROfficerDashboard() {
-  const { employees, leaveRequests, attendance, departments } = useAppData();
+  const { employees, leaveRequests, attendance, departments, performance } = useAppData();
 
   return (
     <div className="page-shell">
-      <PageHeader badge="HR Officer" title="HR Dashboard" description="Human resources management overview and workflows" />
+      <PageHeader
+        badge="HR Officer"
+        title="HR Dashboard"
+        description="Human resources management overview and workflows"
+        actions={<Link to="/hr-officer/reports" className="btn-primary text-sm">Full Reports →</Link>}
+      />
 
       <div className="stat-grid">
         <StatCard title="Total Employees" value={employees.length} color="blue"
@@ -26,6 +32,21 @@ export default function HROfficerDashboard() {
         <StatCard title="Departments" value={departments.length} color="purple"
           icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5" /></svg>} />
       </div>
+
+      <section>
+        <div className="mb-4 sm:mb-5">
+          <h2 className="chart-section-title">HR Analytics Hub</h2>
+          <p className="chart-section-lead">Workforce, leave, attendance & department intelligence</p>
+        </div>
+        <PortalCharts
+          variant="hr-dashboard"
+          employees={employees}
+          departments={departments}
+          leaveRequests={leaveRequests}
+          attendance={attendance}
+          performance={performance}
+        />
+      </section>
 
       <div className="content-grid">
         <div className="card">

@@ -142,7 +142,7 @@ export function runChatbotTests(): { passed: number; failed: number; results: st
     { q: 'approve leave hr', expect: 'Leave Approval' },
     { q: 'teacher burnout tips', expect: 'Burnout' },
     { q: 'assign tasks department', expect: 'Assign Tasks' },
-    { q: 'backup data admin', expect: 'Backup' },
+    { q: 'export reports admin', expect: 'Export' },
     { q: '2 + 2', expect: '4' },
     { q: 'who are you', expect: 'SAGE' },
     { q: 'leave types', expect: 'Vacation' },

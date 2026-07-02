@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import PageHeader from '@/components/shared/PageHeader';
 import StatCard from '@/components/shared/StatCard';
+import AdminAnalyticsCharts from '@/components/charts/AdminCharts';
 import { useAppData } from '@/context/AppDataContext';
 
 const ArrowIcon = () => (
@@ -10,7 +11,7 @@ const ArrowIcon = () => (
 );
 
 export default function SuperAdminDashboard() {
-  const { employees, departments, leaveRequests, auditLogs } = useAppData();
+  const { employees, departments, leaveRequests, attendance, performance, auditLogs } = useAppData();
 
   const pendingLeaves = leaveRequests.filter((l) => l.status === 'pending').length;
   const activeEmployees = employees.filter((e) => e.status === 'active').length;
@@ -21,6 +22,11 @@ export default function SuperAdminDashboard() {
         badge="Super Admin"
         title="Dashboard Overview"
         description="System-wide administration, analytics, and control center"
+        actions={
+          <Link to="/super-admin/reports" className="btn-primary text-sm">
+            Full Reports →
+          </Link>
+        }
       />
 
       <div className="stat-grid">
@@ -34,15 +40,30 @@ export default function SuperAdminDashboard() {
           icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>} />
       </div>
 
+      <section>
+        <div className="mb-4 sm:mb-5">
+          <h2 className="chart-section-title">Analytics Command Center</h2>
+          <p className="chart-section-lead">Real-time workforce, attendance, and leave intelligence</p>
+        </div>
+        <AdminAnalyticsCharts
+          employees={employees}
+          departments={departments}
+          leaveRequests={leaveRequests}
+          attendance={attendance}
+          performance={performance}
+          variant="dashboard"
+        />
+      </section>
+
       <div className="content-grid">
         <div className="card">
           <h2 className="panel-title mb-4">Quick Actions</h2>
           <div className="grid grid-cols-1 gap-2 xs:grid-cols-2">
             {[
               { label: 'Manage Users', path: '/super-admin/users' },
-              { label: 'System Settings', path: '/super-admin/settings' },
+              { label: 'Manage Roles', path: '/super-admin/roles' },
               { label: 'View Reports', path: '/super-admin/reports' },
-              { label: 'Backup Data', path: '/super-admin/backup' },
+              { label: 'All Employees', path: '/super-admin/employees' },
             ].map((action) => (
               <Link key={action.path} to={action.path} className="quick-action">
                 {action.label} <ArrowIcon />
@@ -57,7 +78,7 @@ export default function SuperAdminDashboard() {
             {auditLogs.slice(0, 4).map((log) => (
               <div key={log.id} className="flex items-start gap-3 rounded-xl bg-gradient-to-r from-mint-50 to-primary-50/20 p-3 ring-1 ring-primary-100">
                 <div className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-primary-500 to-accent-500" />
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm font-semibold text-ink-900">{log.action}</p>
                   <p className="text-xs text-ink-500">{log.user} · {log.timestamp}</p>
                 </div>

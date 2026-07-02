@@ -82,13 +82,13 @@ export const knowledgeBase: KnowledgeEntry[] = [
     keywords: ['system settings', 'configure settings', 'settings admin'],
     category: 'role',
     roles: ['super-admin'],
-    answer: `**System Settings (Super Admin):**\n\n📍 Sidebar → **System Settings**\n\nConfigure:\n• School name\n• Email notifications\n• Attendance reminders\n• Leave auto-approve\n• Session timeout (15/30/60 min)\n• Backup frequency (daily/weekly/monthly)`,
+    answer: `**System configuration (Super Admin):**\n\nUse these sidebar areas:\n\n• **Manage Users** — accounts & access\n• **Manage Roles** — permissions overview\n• **Reports** — analytics charts & exports\n• **Departments** & **All Employees** — org structure\n\nSchool-wide administration is handled through these modules in this demo build.`,
   },
   {
     keywords: ['backup', 'restore', 'backup data'],
     category: 'role',
     roles: ['super-admin'],
-    answer: `**Backup & Restore (Super Admin):**\n\n📍 Sidebar → **Backup & Restore**\n\n• **Create Backup** — Full system data snapshot\n• **Restore** — Recover from last backup\n• Shows last backup timestamp\n\n⚠️ Restore overwrites current data — use carefully!`,
+    answer: `**Data Export (Super Admin):**\n\n📍 Sidebar → **Reports**\n\nExport school data via report cards:\n• **Employee Summary** — headcount & status\n• **Attendance Today** — presence breakdown\n• **Leave Requests** — pending & approved\n• **Department Overview** — org metrics\n\nClick **Export Report** on any card. The Reports page also includes interactive analytics charts.`,
   },
   {
     keywords: ['manage roles', 'permissions', 'access control', 'rbac'],
@@ -279,7 +279,7 @@ export const knowledgeBase: KnowledgeEntry[] = [
   {
     keywords: ['cybersecurity', 'data security', 'school security'],
     category: 'world',
-    answer: `**School Data Security (2026):**\n\n🔒 **Best practices:**\n• Role-based access control (SEMS has this!)\n• Regular data backups (Super Admin feature)\n• Strong password policies\n• Session timeout configuration\n• Audit logging for all actions\n• Encrypt data at rest & in transit\n• Employee security training\n• GDPR/FERPA compliance for student data\n\nNever share admin credentials!`,
+    answer: `**School Data Security (2026):**\n\n🔒 **Best practices:**\n• Role-based access control (SEMS has this!)\n• Regular report exports via **Reports**\n• Strong password policies\n• Audit logging for all actions\n• Encrypt data at rest & in transit\n• Employee security training\n• GDPR/FERPA compliance for student data\n\nNever share admin credentials!`,
   },
   {
     keywords: ['cloud on-premise', 'cloud vs', 'hosting school system'],
@@ -452,19 +452,19 @@ export const knowledgeBase: KnowledgeEntry[] = [
     keywords: ['system reports', 'system wide reports', 'generate system report', 'export system report'],
     category: 'role',
     roles: ['super-admin'],
-    answer: `**System Reports (Super Admin):**\n\n📍 Sidebar → **Reports**\n\nAvailable reports:\n• **Employee Summary** — Total & active counts\n• **Attendance Today** — Present/late/absent breakdown\n• **Leave Requests** — Pending & approved stats\n• **Department Overview** — Dept count & averages\n\nClick **Export Report** on any card (demo mode).`,
+    answer: `**System Reports (Super Admin):**\n\n📍 Sidebar → **Reports**\n\n**Executive Analytics Suite** with interactive charts:\n• Workforce growth & hiring trends\n• Department breakdown & leave pipeline\n• Attendance pulse & performance radar\n• Weekly system activity\n\n**Export cards:** Employee Summary, Attendance Today, Leave Requests, Department Overview.\n\nDashboard also shows a live **Analytics Command Center** with key charts.`,
   },
   {
     keywords: ['session timeout', 'timeout settings', 'auto logout'],
     category: 'role',
     roles: ['super-admin'],
-    answer: `**Session Timeout:**\n\n📍 Sidebar → **System Settings**\n\nConfigure auto-logout after inactivity:\n• 15 minutes\n• 30 minutes (default)\n• 60 minutes\n\nClick **Save Settings** to apply. Helps protect school data on shared devices!`,
+    answer: `**Session & Security (Super Admin):**\n\nIn this demo, sessions are managed client-side per browser tab. For production, integrate your school's SSO or identity provider.\n\nReview **Manage Roles** for permission boundaries and export reports from **Reports** to archive school data.`,
   },
   {
     keywords: ['email notifications', 'enable notifications', 'attendance reminders settings'],
     category: 'role',
     roles: ['super-admin'],
-    answer: `**Notifications Settings:**\n\n📍 Sidebar → **System Settings**\n\nToggle options:\n• ✅ **Email notifications** — System alerts via email\n• ✅ **Attendance reminders** — Daily check-in prompts\n• Leave auto-approve (optional)\n\nSave settings to apply across the system.`,
+    answer: `**Notifications (Super Admin):**\n\nAnnouncements and leave status updates flow through SEMS modules:\n\n• **Reports** — monitor attendance & leave trends\n• **Manage Users** — control who receives portal access\n• HR & Employee portals — day-to-day alerts via workflows\n\nUse **Reports** charts to spot attendance or leave patterns early.`,
   },
   {
     keywords: ['departments positions', 'manage positions', 'job positions hr', 'positions hr'],
@@ -521,11 +521,11 @@ export const knowledgeBase: KnowledgeEntry[] = [
   {
     keywords: ['is it secure', 'security features', 'sems secure', 'data protection sems'],
     category: 'system',
-    answer: `**SEMS Security Features:**\n\n🔒 Built-in protections:\n• Role-based access control (4 permission levels)\n• Protected routes — login required\n• Session timeout configuration\n• Audit activity logging\n• Backup & restore (Super Admin)\n\nBest practice: Never share admin credentials. Use strong passwords in production!`,
+    answer: `**SEMS Security Features:**\n\n🔒 Built-in protections:\n• Role-based access control (4 permission levels)\n• Protected routes — login required\n• Audit activity logging\n• Report exports for data archiving (Super Admin)\n\nBest practice: Never share admin credentials. Use strong passwords in production!`,
   },
   {
     keywords: ['developer', 'who built', 'who made', 'who created', 'raminder', 'jangao', 'raminder jangao', 'built sems', 'who developed'],
     category: 'system',
-    answer: `**Meet the Developer** 🚀\n\n**Raminder Jangao**\n_Lead Developer & System Architect_\n\nRaminder designed and built the entire **School Employees Management System** from the ground up:\n\n• 🎨 **Candy Green UI** — custom theme & design system\n• 🤖 **SAGE AI** — intelligent chatbot with 50+ knowledge entries\n• 👥 **4 Role Portals** — 32 interactive feature pages\n• 📱 **Fully Responsive** — mobile-first across every screen\n\nBuilt with React, TypeScript, Tailwind CSS & Vite.\n\nVisit the **Developer** section on the Home page to see the full showcase! ✨`,
+    answer: `**Meet the Developer** 🚀\n\n**Raminder Jangao**\n_Lead Developer & System Architect_\n\nRaminder designed and built the entire **School Employees Management System** from the ground up:\n\n• 🎨 **Candy Green UI** — custom theme & design system\n• 🤖 **SAGE AI** — intelligent chatbot with 50+ knowledge entries\n• 👥 **4 Role Portals** — 30 interactive feature pages\n• 📱 **Fully Responsive** — mobile-first across every screen\n\nBuilt with React, TypeScript, Tailwind CSS & Vite.\n\nVisit the **Developer** section on the Home page to see the full showcase! ✨`,
   },
 ];

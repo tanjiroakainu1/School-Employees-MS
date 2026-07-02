@@ -51,9 +51,9 @@ export default function RegisterPage() {
         description="Register with your school email and get routed to your role dashboard instantly."
       />
 
-      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-        <div className="card shadow-soft">
-          <form onSubmit={handleRegister} className="space-y-4 sm:space-y-5">
+      <div className="auth-page max-w-3xl">
+        <div className="auth-form-card">
+          <form onSubmit={handleRegister} className="space-y-5">
             <div>
               <h2 className="text-lg font-bold text-ink-900 sm:text-xl">Account details</h2>
               <p className="mt-1 text-sm text-ink-500">
@@ -132,10 +132,9 @@ export default function RegisterPage() {
               label="Register As"
             />
 
-            {error && (
-              <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
-            )}
+            {error && <div className="auth-error">{error}</div>}
 
+            <div className="space-y-4 pt-1">
             <button type="submit" className="btn-primary w-full py-3">
               Create Account & Continue
             </button>
@@ -153,6 +152,7 @@ export default function RegisterPage() {
                 Try demo quick access
               </Link>
             </p>
+            </div>
           </form>
         </div>
 

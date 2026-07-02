@@ -82,5 +82,5 @@ export const mockAuditLogs: AuditLog[] = [
   { id: 'AL001', action: 'User Login', user: 'Admin User', timestamp: '2026-07-02 08:00:00', details: 'Successful login from 192.168.1.1' },
   { id: 'AL002', action: 'Employee Created', user: 'Sarah Johnson', timestamp: '2026-07-01 14:30:00', details: 'Created employee Maria Garcia (E005)' },
   { id: 'AL003', action: 'Leave Approved', user: 'Sarah Johnson', timestamp: '2026-06-30 10:15:00', details: 'Approved leave request L002 for Lisa Anderson' },
-  { id: 'AL004', action: 'Settings Updated', user: 'Admin User', timestamp: '2026-06-29 16:45:00', details: 'Updated system notification settings' },
+  { id: 'AL004', action: 'Report Exported', user: 'Admin User', timestamp: '2026-06-29 16:45:00', details: 'Exported system-wide employee summary report' },
 ];

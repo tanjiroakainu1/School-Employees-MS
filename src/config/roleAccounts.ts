@@ -13,7 +13,7 @@ export const roleAccounts: RoleAccount[] = [
       position: 'System Administrator',
     },
     password: DEMO_PASSWORD,
-    description: 'Full system access, users, settings, reports & backup',
+    description: 'Full system access, users, departments & reports',
     color: 'from-green-600 to-emerald-700',
     gradient: 'bg-gradient-to-br from-green-600 to-emerald-700',
     icon: 'shield',

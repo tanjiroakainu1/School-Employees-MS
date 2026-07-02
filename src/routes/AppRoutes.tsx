@@ -10,11 +10,9 @@ import RegisterPage from '@/pages/RegisterPage';
 import SuperAdminDashboard from '@/roles/super-admin/SuperAdminDashboard';
 import ManageUsers from '@/roles/super-admin/ManageUsers';
 import ManageRoles from '@/roles/super-admin/ManageRoles';
-import SystemSettings from '@/roles/super-admin/SystemSettings';
 import SuperAdminDepartments from '@/roles/super-admin/SuperAdminDepartments';
 import AllEmployees from '@/roles/super-admin/AllEmployees';
 import SystemReports from '@/roles/super-admin/SystemReports';
-import BackupRestore from '@/roles/super-admin/BackupRestore';
 
 import HROfficerDashboard from '@/roles/hr-officer/HROfficerDashboard';
 import RegisterEmployee from '@/roles/hr-officer/RegisterEmployee';
@@ -87,11 +85,9 @@ export default function AppRoutes() {
         <Route path="dashboard" element={<SuperAdminDashboard />} />
         <Route path="users" element={<ManageUsers />} />
         <Route path="roles" element={<ManageRoles />} />
-        <Route path="settings" element={<SystemSettings />} />
         <Route path="departments" element={<SuperAdminDepartments />} />
         <Route path="employees" element={<AllEmployees />} />
         <Route path="reports" element={<SystemReports />} />
-        <Route path="backup" element={<BackupRestore />} />
       </Route>
 
       <Route

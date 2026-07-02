@@ -47,7 +47,7 @@ export const roleSummaries = [
     role: 'super-admin',
     label: 'Super Admin',
     gradient: 'from-green-600 to-emerald-700',
-    features: ['Full system access', 'Manage users & roles', 'System settings', 'Backup & restore', 'System-wide reports'],
+    features: ['Full system access', 'Manage users & roles', 'Departments & employees', 'Analytics & reports'],
   },
   {
     role: 'hr-officer',

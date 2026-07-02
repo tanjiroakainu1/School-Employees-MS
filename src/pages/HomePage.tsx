@@ -52,7 +52,7 @@ export default function HomePage() {
             {[
               { value: '4', label: 'User Roles' },
               { value: '8+', label: 'Modules' },
-              { value: '32', label: 'Feature Pages' },
+              { value: '30', label: 'Feature Pages' },
               { value: '100%', label: 'Role-Based' },
             ].map((stat) => (
               <div key={stat.label} className="rounded-2xl bg-white/10 px-4 py-4 text-center backdrop-blur-sm sm:py-5">

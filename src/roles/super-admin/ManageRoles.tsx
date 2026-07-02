@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PageHeader from '@/components/shared/PageHeader';
 
 const defaultRoles = [
-  { id: '1', name: 'Super Admin', permissions: ['Full system access', 'Manage users and roles', 'Configure settings', 'Backup and restore'] },
+  { id: '1', name: 'Super Admin', permissions: ['Full system access', 'Manage users and roles', 'Departments & employees', 'Analytics & reports'] },
   { id: '2', name: 'HR Officer', permissions: ['Manage employees', 'Process hiring', 'Approve leave', 'HR reports'] },
   { id: '3', name: 'Department Head', permissions: ['View department employees', 'Approve leave', 'Assign tasks', 'Department reports'] },
   { id: '4', name: 'Employee', permissions: ['View profile', 'Submit leave', 'View attendance', 'View performance'] },
